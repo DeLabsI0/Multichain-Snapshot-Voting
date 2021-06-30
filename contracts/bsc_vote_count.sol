@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -6,10 +7,11 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint);
 }
 
-contract BadgerVotingShare {
+contract BadgerVotingShareTest1 {
 
-    // btcb is the BSC bbadger-pegged coin. This address is for btcb.
-    IERC20 constant btcb = IERC20(0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c);
+    // bbadger is the BADGER token on BSC.
+    // TODO: Right now we're using the address of USDC on BSC testnet to test our contract.
+    IERC20 constant bbadger = IERC20(0x9780881Bf45B83Ee028c4c1De7e0C168dF8e9eEF);
 
     function decimals() external pure returns (uint8) {
         return uint8(18);
@@ -24,15 +26,15 @@ contract BadgerVotingShare {
     }
 
     function totalSupply() external view returns (uint) {
-        return btcb.totalSupply();
+        return bbadger.totalSupply();
     }
 
     /*
-        TODO: Count the votes in all places where btcb can be held.
+        TODO: Count the votes in all places where bbadger can be held.
         This includes staked supply and SETT deposited supply.
     */
     function _badgerBalanceOf(address _voter) internal view returns(uint) {
-        return btcb.balanceOf(_voter);
+        return bbadger.balanceOf(_voter);
     }
 
     function balanceOf(address _voter) external view returns (uint) {

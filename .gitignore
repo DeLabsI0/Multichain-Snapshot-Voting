@@ -1,3 +1,5 @@
 build/
 ethereum_vote_count.sol
 node_modules/
+truffle-config.js
+
